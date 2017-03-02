@@ -24,14 +24,14 @@
 </nav>
 
 <div class="jumbotron text-center">
-  
+
 
   <img src="images/blockchain.jpg" alt="BC" title="bitcoin" />
-  <p>Block chain</p>
+  <p>BlockChain</p>
 </div>
 
 <div class="container">
-  <h2>API Bitcoin</h2>
+  <center> <h2>API Bitcoin</h2> </center>
   <table class="table">
     <thead>
       <tr>
@@ -43,9 +43,9 @@
     <tbody>
 
       <tr class="danger">
-        <td>BlockCypher</td>
-        <td><img src="/images/blockcypher.PNG" alt="Photo de montagne" title="bitcoin" /></td>
-        <td>http://blockcypher.com</td>
+        <td>Mubiz</td>
+        <td><img src="images/mubiz-logo.png" alt="Photo de montagne" title="bitcoin" /></td>
+        <td><a href =" http://blockcypher.com"> Cliquer ici </a></td>
       </tr>
 
     </tbody>
@@ -55,28 +55,65 @@
   </div>
 </div>
 
+<center>
 
+
+<div>
+				<input id="premier" type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/info " />
+		<input id="deuxieme" type="button2" class="btn btn-primary" value="http://bitcoin.mubiz.com/blockchaininfo" />
+    	<input id="troisieme" type="button2" class="btn btn-primary" value="http://bitcoin.mubiz.com/mininginfo" />
+      	<input id="quatrieme" type="button2" class="btn btn-primary" value="http://bitcoin.mubiz.com/peerinfo" />
+
+
+			</div>
+
+</center>
+<br>
+<center>
 <div class="row">
-  <div class="col-lg-12 col-xs-6">
-      <pre>
-          <code id="demo" class="json kljs"></code>
-      </pre>
-  </div>
+	<div class="col-lg-12 col-xs-6">
+    	<pre>
+        	<code id="demo" class="json kljs"></code>
+    	</pre>
+	</div>
 </div>
+</center>
 
 <script>
+function loadFile(value)
+{
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-      var myObj = this.responseText;
-      var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2);
-      document.getElementById("demo").innerHTML = jsonPretty;
-  }
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = this.responseText;
+        var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2);
+        document.getElementById("demo").innerHTML = jsonPretty;
+    }
 };
-xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main", true);
-xmlhttp.send();
 
-</script>
+
+xmlhttp.open("GET", value, true);
+xmlhttp.send();
+}
+
+var button = document.getElementById('premier');
+var button2 = document.getElementById('deuxieme');
+var button3 = document.getElementById('troisieme');
+var button4 = document.getElementById('quatrieme');
+
+button.addEventListener('click', function() {
+            loadFile(this.value); // à chaque clique, un fichier sera chargé dans la page
+        });
+        button2.addEventListener('click', function() {
+                    loadFile(this.value); // à chaque clique, un fichier sera chargé dans la page
+                });
+                button3.addEventListener('click', function() {
+                            loadFile(this.value); // à chaque clique, un fichier sera chargé dans la page
+                        });
+                        button4.addEventListener('click', function() {
+                                    loadFile(this.value); // à chaque clique, un fichier sera chargé dans la page
+                                });
+			</script>
 </body>
 
 
