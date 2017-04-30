@@ -43,76 +43,106 @@
   </div>
 </div>
 
-<!-- Corps de la page -->
+
 <div class="container-fluid text-center">
-  <h2>Recherche</h2>
+
+
+ <!-- Premiere requete -->
+
   <div class="form-group" style="padding-bottom : 40px;">
     <label class="control-label col-sm-3" for="adresse">Adresse</label>
     <div class="col-sm-6">
-    <input type="text" class="form-control" id="adresse" placeholder="Entrer une adresse">
+    <input type="text" class="form-control" id="adresse" placeholder="Adresse">
     </div>
-    <div class="text-left col-sm-3"> <button id="valider1"  class="btn btn-default">Valider</button> </div>
+    <div class="text-left col-sm-3"> <button id="validerAdress"  class="btn btn-default">Rechercher</button> </div>
   </div>
-  <div class="form-group" style="padding-bottom : 40px;">
-    <label class="control-label col-sm-3" for="hashTransaction">Hash de transaction</label>
-    <div class="col-sm-6">
-    <input type="text" class="form-control" id="hashTransaction" placeholder="Entrer un hash de transaction">
+
+
+
+  <!-- deuxieme requete -->
+
+    <div class="form-group" style="padding-bottom : 40px;">
+      <label class="control-label col-sm-3" for="numeroBloc">Index d'un bloc</label>
+      <div class="col-sm-6">
+      <input type="text" class="form-control" id="numero" placeholder="Entrer un numéro d'un bloc">
+      </div>
+      <div class="text-left col-sm-3"> <button id="validerBloc"  class="btn btn-default">Rechercher</button> </div>
     </div>
-    <div class="text-left col-sm-3"> <button id="valider2"  class="btn btn-default">Valider</button> </div>
-  </div>
+
+<!-- troisieme requete -->
+
   <div class="form-group" style="padding-bottom : 40px;">
     <label class="control-label col-sm-3" for="hashBloc">Hash d'un bloc</label>
     <div class="col-sm-6">
-    <input type="text" class="form-control" id="hashBloc" placeholder="Entrer un hash d'un bloc">
+    <input type="text" class="form-control" id="hashBloc" placeholder="Hash d'un bloc">
     </div>
-    <div class="text-left col-sm-3"> <button id="valider3"  class="btn btn-default">Valider</button> </div>
+    <div class="text-left col-sm-3"> <button id="validerHashBloc"  class="btn btn-default">Rechercher</button> </div>
   </div>
-  <div class="form-group" style="padding-bottom : 40px;">
-    <label class="control-label col-sm-3" for="numeroBloc">Index (numéro) d'un bloc</label>
-    <div class="col-sm-6">
-    <input type="text" class="form-control" id="numeroBloc" placeholder="Entrer un numéro d'un bloc">
+
+  <!-- quatrieme requete -->
+
+    <div class="form-group" style="padding-bottom : 40px;">
+      <label class="control-label col-sm-3" for="hashTransaction">Hash de transaction</label>
+      <div class="col-sm-6">
+      <input type="text" class="form-control" id="hash" placeholder="Transaction">
+      </div>
+      <div class="text-left col-sm-3"> <button id="validerHash"  class="btn btn-default">Rechercher</button> </div>
     </div>
-    <div class="text-left col-sm-3"> <button id="valider4"  class="btn btn-default">Valider</button> </div>
-  </div>
+
 
   <div class="row text-center">
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
       <h3>Recherche : </h3>
       <pre  class="text-left">
-    
+
       </pre>
     </div>
     <div class="col-sm-3"></div>
   </div>
 </div>
 <script>
-  var valider1 = document.getElementById("valider1");
-  var valider2 = document.getElementById("valider2");
-  var valider3 = document.getElementById("valider3");
-  var valider4 = document.getElementById("valider4");
 
+// script 1er requete fds
 
-      valider1.addEventListener('click', function() {
-  var code = document.getElementById("adresse").value;
-  var isAddress = /^[0-9a-zA-Z]{34}$/.test(code);
+var validerAdress = document.getElementById("validerAdress");
+      validerAdress.addEventListener('click', function() {
+  var resultat = document.getElementById("adresse").value;
+  var isAddress = /^[0-9a-zA-Z]{34}$/.test(resultat);
   if(isAddress == true)
   {
-    var requete = "https://bitcoin.mubiz.com/address/"  + code + "/";
+    var requete = "https://bitcoin.mubiz.com/address/"  + resultat ;
     loadFile(requete);
   }})
-      valider2.addEventListener('click', function() {
-  var code = document.getElementById("hashTransaction").value;
-  var requete = "https://bitcoin.mubiz.com/transaction/" + code + "/";
-  loadFile(requete); })
+
+  // script 2eme requete
+
+    var validerBloc = document.getElementById("validerBloc");
+        valider4.addEventListener('click', function() {
+    var resultat = document.getElementById("numero").value;
+    var requete = "https://bitcoin.mubiz.com/block_index/" + resultat;
+    loadFile(requete); })
+
+
+
+// script 3eme requete
+
+  var validerHashBloc = document.getElementById("validerHashBloc");
+
       valider3.addEventListener('click', function() {
-  var code = document.getElementById("hashBloc").value;
-  var requete = "https://bitcoin.mubiz.com/block_hash/" + code + "/" ;
+  var resultat = document.getElementById("hashBloc").value;
+  var requete = "https://bitcoin.mubiz.com/block_hash/" + resultat  ;
   loadFile(requete); })
-      valider4.addEventListener('click', function() {
-  var code = document.getElementById("numeroBloc").value;
-  var requete = "https://bitcoin.mubiz.com/block_index/" + code + "/";
-  loadFile(requete); })
+
+  // script 4eme requete
+
+
+    var validerHash = document.getElementById("validerHash");
+        valider2.addEventListener('click', function() {
+    var resultat = document.getElementById("hash").value;
+    var requete = "https://bitcoin.mubiz.com/transaction/" + resultat ;
+    loadFile(requete); })
+
 
 function loadFile(file){
 
@@ -121,22 +151,22 @@ function loadFile(file){
     xhr.open('GET', file);
 
     xhr.addEventListener('readystatechange', function(){
-       if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
-      var myObj = xhr.responseText; // on récupère le résultat de la requête
-       var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2); // on parse le résultat de la requête
+       if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      var myObj = xhr.responseText; //recuperation du resultat
+       var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2);
 
 
       //output(syntaxHighlight(jsonPretty));
-       document.getElementById('fileContent').innerHTML =  syntaxHighlight(jsonPretty) ; // on affiche
+       document.getElementById('fileContent').innerHTML =  syntaxHighlight(jsonPretty) ;
 
     }
 
     });
 
-    xhr.send(null); // La requête est prête, on envoie tout !
+    xhr.send(null);
   }
 
-  /* PARTIE 2 */
+  /* Partie 2 TP2 */
 
   function output(inp) {
     document.body.appendChild(document.createElement('pre')).innerHTML = inp;
@@ -161,6 +191,9 @@ function syntaxHighlight(json) {
       return '<span class="' + cls + '">' + match + '</span>';
   });
 }
+
+output(str);
+output(syntaxHighlight(str));
 
 
 </script>
